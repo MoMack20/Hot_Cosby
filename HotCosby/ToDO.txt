@@ -1,0 +1,4 @@
+Design a tenative map
+Decide on floor dimensions
+Decide of wall height
+Get player camera setup
