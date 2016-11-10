@@ -1,4 +1,14 @@
-Design a tenative map
-Decide on floor dimensions
-Decide of wall height
-Get player camera setup
+?Design a tenative map
+?Decide on floor dimensions
+?Decide of wall height
+?Get player camera setup
+
+Nav Mesh and agent
+Enemy
+Basic Enemy AI
+Finalize Camera Angle
+Gameplay goals and elements
+
+Textures
+Models
+
