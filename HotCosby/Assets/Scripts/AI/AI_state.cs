@@ -4,6 +4,7 @@ using System.Collections;
 public interface IAI_state {
 
 	void OnTriggerStay(Collider other);
+	void OnTriggerExit (Collider other);
 	void UpdateState ();
 	void Start ();
 	void Start (Vector3 target);

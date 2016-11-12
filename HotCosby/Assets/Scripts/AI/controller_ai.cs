@@ -36,4 +36,8 @@ public class controller_ai : MonoBehaviour {
 	void OnTriggerStay(Collider other) {
 		curState.OnTriggerStay (other);
 	}
+
+	void OnTriggerExit(Collider other) {
+		curState.OnTriggerExit (other);
+	}
 }

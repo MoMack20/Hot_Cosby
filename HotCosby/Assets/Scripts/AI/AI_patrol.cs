@@ -43,4 +43,8 @@ public class AI_patrol : IAI_state {
 			}
 		}
 	}
+
+	public void OnTriggerExit(Collider other) {
+
+	}
 }

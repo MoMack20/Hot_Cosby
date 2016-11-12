@@ -5,9 +5,11 @@ public class AI_chase : IAI_state {
 
 	private controller_ai controller;
 	private Vector3 curTarget;
+	private bool playerInSight;
 
 	public AI_chase(controller_ai c) {
 		controller = c;
+		playerInSight = false;
 	}
 
 	public void Start() {
@@ -18,15 +20,16 @@ public class AI_chase : IAI_state {
 		controller.curState = this;
 		curTarget = target;
 		controller.agent.destination = target;
+		playerInSight = true;
 		Debug.Log ("see player");
 	}
 
 	public void UpdateState () {
 		controller.agent.destination = curTarget;
-		if (Vector3.Distance (curTarget, controller.transform.position) < 2.0) {
+		if (Vector3.Distance (curTarget, controller.transform.position) < 1.0) {
 			Debug.Log ("Got Target");
-			controller.transform.position = controller.startTransform;
-			Debug.Log ("Move from: " + controller.transform.position.ToString () + " to: " + controller.startTransform.ToString ());
+			if(playerInSight)
+				controller.transform.position = controller.startTransform;
 			controller.patrolState.Start ();
 		}
 	}
@@ -43,5 +46,10 @@ public class AI_chase : IAI_state {
 				}
 			}
 		}
+	}
+
+	public void OnTriggerExit(Collider other) {
+		if (other.CompareTag ("Player") && playerInSight)
+			playerInSight = false;
 	}
 }
