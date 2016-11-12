@@ -7,11 +7,16 @@ public class controller_ai : MonoBehaviour {
 	// Use this for initialization
 	[HideInInspector] public NavMeshAgent agent;
 	public List<GameObject> PatrolPoints = new List<GameObject>();
-	[HideInInspector] public IAI_state curState;
+ 	public IAI_state curState;
 	[HideInInspector] public IAI_state patrolState;
 	[HideInInspector] public IAI_state chaseState;
+	[HideInInspector] public Vector3 startTransform;
 	void Awake () {
 		patrolState = new AI_patrol (this);
+		chaseState = new AI_chase (this);
+
+		startTransform = transform.position;
+		Debug.Log ("Start point: " + startTransform.ToString ());
 
 		agent = GetComponent<NavMeshAgent> ();
 
@@ -24,6 +29,7 @@ public class controller_ai : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log (curState.ToString ());
 		curState.UpdateState ();
 	}
 

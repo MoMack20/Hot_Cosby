@@ -14,6 +14,12 @@ public class AI_patrol : IAI_state {
 		controller.curState = this;
 		curWaypoint = controller.PatrolPoints [0].transform.position;
 		controller.agent.destination = curWaypoint;
+		Debug.Log ("staring patrol");
+		Debug.Log ("Going to: " + curWaypoint.ToString());
+	}
+
+	public void Start(Vector3 target) {
+		
 	}
 
 	public void UpdateState () {
@@ -33,7 +39,7 @@ public class AI_patrol : IAI_state {
 			RaycastHit hit;
 			if (Physics.Raycast (ray, out hit)) {
 				if (hit.collider.CompareTag ("Player"))
-					Debug.Log ("Player in sight");
+					controller.chaseState.Start (hit.transform.position);
 			}
 		}
 	}
