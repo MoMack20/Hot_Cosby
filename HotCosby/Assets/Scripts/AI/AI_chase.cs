@@ -21,7 +21,6 @@ public class AI_chase : IAI_state {
 		curTarget = target;
 		controller.agent.destination = target;
 		playerInSight = true;
-		Debug.Log ("see player");
 	}
 
 	public void UpdateState () {
@@ -42,7 +41,6 @@ public class AI_chase : IAI_state {
 			if (Physics.Raycast (ray, out hit)) {
 				if (hit.collider.CompareTag ("Player")) {
 					curTarget = hit.transform.position;
-					Debug.Log ("pursuing player");
 				}
 			}
 		}
