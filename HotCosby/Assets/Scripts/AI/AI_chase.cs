@@ -25,8 +25,13 @@ public class AI_chase : IAI_state {
 
 	public void UpdateState () {
 		controller.agent.destination = curTarget;
-		if (Vector3.Distance (curTarget, controller.transform.position) < 0.7) {
-			controller.idleState.Start(lastKnownVelocity);
+		if (Vector3.Distance (curTarget, controller.transform.position) < 1.0) {
+			if (playerInSight == true) {
+				controller.transform.position = controller.startTransform;
+				controller.patrolState.Start ();
+			}
+			else
+				controller.idleState.Start(lastKnownVelocity);
 		}
 	}
 

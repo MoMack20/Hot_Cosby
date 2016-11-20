@@ -52,7 +52,6 @@ public class AI_idle : IAI_state {
 			}
 		} 
 		if(!leftFirst){
-			Debug.Log ("Right first");
 			if (!lookedRight) {
 				if (Vector3.Angle (controller.GetComponent<Transform> ().forward, initialForward) < 90) {
 					controller.GetComponent<Transform> ().Rotate (Vector3.up, Time.deltaTime * 300);
