@@ -5,6 +5,7 @@ public class AI_patrol : IAI_state {
 
 	private controller_ai controller;
 	private Vector3 curWaypoint;
+	private Vector3 lastWaypoint;
 
 	public AI_patrol(controller_ai c) {
 		controller = c;
@@ -12,10 +13,10 @@ public class AI_patrol : IAI_state {
 
 	public void Start() {
 		controller.curState = this;
-		curWaypoint = controller.PatrolPoints [0].transform.position;
+		curWaypoint = controller.PatrolPoints [Random.Range (0, controller.PatrolPoints.Count)].transform.position;
+		while(curWaypoint == lastWaypoint)
+			curWaypoint = controller.PatrolPoints [Random.Range (0, controller.PatrolPoints.Count)].transform.position;
 		controller.agent.destination = curWaypoint;
-		Debug.Log ("staring patrol");
-		Debug.Log ("Going to: " + curWaypoint.ToString());
 	}
 
 	public void Start(Vector3 target) {
@@ -24,7 +25,8 @@ public class AI_patrol : IAI_state {
 
 	public void UpdateState () {
 		if (Vector3.Distance (controller.agent.destination, controller.transform.position) < 1.0) {
-			GoToNextPost ();
+			lastWaypoint = curWaypoint;
+			controller.idleState.Start ();
 		}
 	}
 

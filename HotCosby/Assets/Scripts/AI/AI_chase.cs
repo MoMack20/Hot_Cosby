@@ -6,10 +6,10 @@ public class AI_chase : IAI_state {
 	private controller_ai controller;
 	private Vector3 curTarget;
 	private bool playerInSight;
+	private Vector3 lastKnownVelocity;
 
 	public AI_chase(controller_ai c) {
 		controller = c;
-		playerInSight = false;
 	}
 
 	public void Start() {
@@ -25,11 +25,8 @@ public class AI_chase : IAI_state {
 
 	public void UpdateState () {
 		controller.agent.destination = curTarget;
-		if (Vector3.Distance (curTarget, controller.transform.position) < 1.0) {
-			Debug.Log ("Got Target");
-			if(playerInSight)
-				controller.transform.position = controller.startTransform;
-			controller.patrolState.Start ();
+		if (Vector3.Distance (curTarget, controller.transform.position) < 0.7) {
+			controller.idleState.Start(lastKnownVelocity);
 		}
 	}
 
@@ -40,6 +37,7 @@ public class AI_chase : IAI_state {
 			RaycastHit hit;
 			if (Physics.Raycast (ray, out hit)) {
 				if (hit.collider.CompareTag ("Player")) {
+					playerInSight = true;
 					curTarget = hit.transform.position;
 				}
 			}
@@ -47,7 +45,9 @@ public class AI_chase : IAI_state {
 	}
 
 	public void OnTriggerExit(Collider other) {
-		if (other.CompareTag ("Player") && playerInSight)
+		if (other.CompareTag ("Player") && playerInSight) {
 			playerInSight = false;
+			lastKnownVelocity = other.GetComponent<Rigidbody> ().velocity;
+		}
 	}
 }

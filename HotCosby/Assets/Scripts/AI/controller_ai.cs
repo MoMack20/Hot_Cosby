@@ -10,10 +10,12 @@ public class controller_ai : MonoBehaviour {
  	public IAI_state curState;
 	[HideInInspector] public IAI_state patrolState;
 	[HideInInspector] public IAI_state chaseState;
+	[HideInInspector] public IAI_state idleState;
 	[HideInInspector] public Vector3 startTransform;
 	void Awake () {
 		patrolState = new AI_patrol (this);
 		chaseState = new AI_chase (this);
+		idleState = new AI_idle (this);
 
 		startTransform = transform.position;
 		Debug.Log ("Start point: " + startTransform.ToString ());
