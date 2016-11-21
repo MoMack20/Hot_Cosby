@@ -18,7 +18,6 @@ public class controller_ai : MonoBehaviour {
 		idleState = new AI_idle (this);
 
 		startTransform = transform.position;
-		Debug.Log ("Start point: " + startTransform.ToString ());
 
 		agent = GetComponent<NavMeshAgent> ();
 
