@@ -1,0 +1,13 @@
+World Kingdom Ministries Website
+
+- Informative website, not too much interactivity with users
+- Warm color palette
+- full length banner with title and background
+- 60% to 70% width container for main content view
+- roll out navigation from the left, clickable menu icon near top of page
+
+Possible Ideas
+
+- Full background image/pattern with data entries having their own semi transparent background
+- Newspaperish format with different columns and rows
+- (Recurring images) Crosses, bibles, fleur de lis, light beams
